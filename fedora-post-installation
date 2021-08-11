@@ -1,0 +1,37 @@
+#Script FEDORA INSTALLATION REPO INSTALL AND ALL OPTIMISATION
+
+#Remove abrt debug for optimization
+echo "REMOVING ABRT"
+dnf remove abrt*
+
+#Install fusion repo
+echo "ADDING OF RPMFUSION REPOSITORY"
+dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+#Gnome optinal software install
+echo "Install optionnel"
+dnf install chrome-gnome-shell gnome-extensions-app gnome-tweak-tool
+
+#Time-Shift 
+echo "Time-Shift Install"
+dnf install timeshift
+
+#Tool for cleaning disk
+echo "BleachBit Install"
+dnf install bleachbit
+
+#Optimization of the preload
+echo "Preload Install"
+dnf copr enable elxreno/preload -y && dnf install preload -y
+
+#Install of snap repo
+sudo dnf install snapd
+
+#UPDATE THE SYSTEM
+echo "First upgrade of the system"
+dnf group update core
+dnf upgrade
+
+#REBOOT
+echo "reboot the system"
+#reboot
