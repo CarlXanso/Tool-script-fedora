@@ -2,36 +2,43 @@
 
 #Remove abrt debug for optimization
 echo "REMOVING ABRT"
-dnf remove abrt*
+dnf remove abrt* -y
 
 #Install fusion repo
 echo "ADDING OF RPMFUSION REPOSITORY"
-dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
+dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
 
-#Gnome optinal software install
-echo "Install optionnel"
-dnf install chrome-gnome-shell gnome-extensions-app gnome-tweak-tool
+#Gnome optinnal software install
+echo "Install optionnal"
+dnf install chrome-gnome-shell gnome-extensions-app gnome-tweak-tool -y
 
 #Time-Shift 
 echo "Time-Shift Install"
-dnf install timeshift
+dnf install timeshift -y
 
 #Tool for cleaning disk
 echo "BleachBit Install"
-dnf install bleachbit
+dnf install bleachbit -y
 
 #Optimization of the preload
 echo "Preload Install"
-dnf copr enable elxreno/preload -y && dnf install preload -y
+dnf copr enable elxreno/preload -y 
+dnf install preload -y
 
-#Install of snap repo
+#Install of snap 
+echo "Snap install"
 sudo dnf install snapd
+
+#FSync and kernel optimization (Zen, Fsync, Wine sync and Open-RGB)
+echo "Custom-Kernel installing"
+dnf copr enable sentry/kernel-fsync  
 
 #UPDATE THE SYSTEM
 echo "First upgrade of the system"
-dnf group update core
-dnf upgrade
+dnf group update core -y
+dnf upgrade -y
 
 #REBOOT
-echo "reboot the system"
-#reboot
+echo "reboot the system" 
+reboot
